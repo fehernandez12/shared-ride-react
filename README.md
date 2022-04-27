@@ -14,10 +14,15 @@ To start working on this project I highly recommend you to check
 [Expo's documentation](https://docs.expo.dev/) on how to get this project up and running locally.
 If you don't want to do so, just run:
 
-```python
+```bash
+# Install dependencies
+yarn
+# Run project
 yarn start
-a //for Android
-i //for iOS
+# For Android
+a
+# For iOS
+i
 ```
 
 ## Want to use this project as yours?
