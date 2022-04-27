@@ -20,15 +20,6 @@ a //for Android
 i //for iOS
 ```
 
-## Contributing
-
-Things that are missing right now:
-
-- [ ] Add tests and coverage implementations
-- [ ] Remove weak Token Authorization system
-- [ ] Implement more async and periodic tasks to improve the rating system
-- [ ] A UI!
-
 ## Want to use this project as yours?
 
 Please stick to the [**LICENSE**](LICENSE), you can read a TL;DR
