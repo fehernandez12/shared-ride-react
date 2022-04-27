@@ -1,3 +1,4 @@
+import { CircleDto } from "./circle.model";
 import { ProfileDto } from "./profile.model";
 
 export interface UserDto {
@@ -7,6 +8,11 @@ export interface UserDto {
   email: string;
   phone_number: string;
   profile: ProfileDto;
+}
+
+export interface UserDetailDto {
+  user: UserDto;
+  circles: CircleDto[];
 }
 
 export interface LoginRequestDto {
@@ -31,4 +37,8 @@ export interface SignupRequestDto {
 
 export interface VerificationRequestDto {
   token: string;
+}
+
+export interface VerificationResponseDto {
+  message: string;
 }
