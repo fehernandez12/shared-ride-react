@@ -14,7 +14,7 @@ To start working on this project I highly recommend you to check
 [Expo's documentation](https://docs.expo.dev/) on how to get this project up and running locally.
 If you don't want to do so, just run:
 
-```bash
+```python
 yarn start
 a //for Android
 i //for iOS
