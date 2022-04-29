@@ -13,8 +13,8 @@ function AppTextInput(props: any) {
     placeholder,
     autoCapitalize,
     value,
-    onChangetext,
-    securetextEntry,
+    onChangeText,
+    secureTextEntry,
   } = props;
 
   let [fontsLoaded] = useFonts({
@@ -32,8 +32,8 @@ function AppTextInput(props: any) {
       placeholder={placeholder}
       autoCapitalize={autoCapitalize}
       value={value}
-      onChangeText={onChangetext}
-      secureTextEntry={securetextEntry ? true : false}
+      onChangeText={onChangeText}
+      secureTextEntry={secureTextEntry ? true : false}
     />
   );
 }

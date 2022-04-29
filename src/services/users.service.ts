@@ -1,6 +1,7 @@
 import { ProfileDto } from "../models/profile.model";
-import { LoginRequestDto, LoginResponseDto, SignupRequestDto, UserDto, VerificationRequestDto, VerificationResponseDto } from "../models/users.model";
+import { LoginRequestDto, LoginResponseDto, SignupRequestDto, UserDetailDto, UserDto, VerificationRequestDto, VerificationResponseDto } from "../models/users.model";
 import { API_URL } from "../utilities/constants";
+import { StorageService } from "./storage.service";
 
 export class UserService {
   async login(request: LoginRequestDto): Promise<LoginResponseDto> {
@@ -51,9 +52,16 @@ export class UserService {
     return data;
   }
 
-  async getUser(username: string): Promise<ProfileDto> {
-    const response = await fetch(`${API_URL}/users/${username}/`);
-    const data = await response.json() as ProfileDto;
+  async getUser(username: string): Promise<UserDetailDto> {
+    const token = await StorageService.getToken();
+    const response = await fetch(`${API_URL}/users/${username}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
+      }
+    });
+    const data = await response.json() as UserDetailDto;
     return data;
   }
 }

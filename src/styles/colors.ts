@@ -3,6 +3,7 @@ interface ColorMap {
 }
 
 export const COLORS: ColorMap = {
+  "white": "#ffffff",
   "curious-blue": "#3D9DD9",
   "mariner-blue": "#2975D9",
   "blumine-blue": "#204F8C",

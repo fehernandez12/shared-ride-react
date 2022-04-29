@@ -22,7 +22,7 @@ export interface LoginRequestDto {
 
 export interface LoginResponseDto {
   user: UserDto;
-  token: string;
+  access_token: string;
 }
 
 export interface SignupRequestDto {
