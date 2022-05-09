@@ -28,8 +28,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  console.log(colorScheme);
-
   return (
     <NavigationContainer
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}

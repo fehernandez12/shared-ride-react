@@ -4,15 +4,18 @@ import { API_URL } from "../utilities/constants";
 import { StorageService } from "./storage.service";
 
 export class UserService {
-  async login(request: LoginRequestDto): Promise<LoginResponseDto | undefined> {
+  async login(request: LoginRequestDto) {
     try {
-      const response = await fetch(`${API_URL}/users/login/`, {
+      const response: Response = await fetch(`${API_URL}/users/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(request)
       });
+      console.log(response.status);
+      console.log(response.ok);
+      console.log(response.text);
       const data = await response.json() as LoginResponseDto;
       return data;
     } catch (error) {

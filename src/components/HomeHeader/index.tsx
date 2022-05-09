@@ -10,8 +10,6 @@ function HomeHeader(props: any) {
   const { user } = props as { user: UserDto };
   const { logout } = useAuth();
 
-  console.log(user);
-
   return (
     <View>
       <AppText
