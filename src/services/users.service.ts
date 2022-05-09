@@ -6,7 +6,8 @@ import { StorageService } from "./storage.service";
 export class UserService {
   async login(request: LoginRequestDto) {
     try {
-      const response: Response = await fetch(`${API_URL}/users/login/`, {
+      const url = `${API_URL}/users/login/`;
+      const response: Response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
