@@ -47,13 +47,15 @@ function AuthProvider(props: any) {
   const getUserAndToken = async () => {
     const token = await StorageService.getToken();
     const currentUser = await StorageService.getUser();
-    const newUser = await userService.getUser(currentUser!.username);
-    if (user != currentUser) {
-      setUser(newUser.user);
-    } else {
-      setUser(currentUser);
+    if (currentUser) {
+      const newUser = await userService.getUser(currentUser!.username);
+      if (user != currentUser) {
+        setUser(newUser.user);
+      } else {
+        setUser(currentUser);
+      }
+      setToken(token);
     }
-    setToken(token);
   };
 
   useEffect(() => {

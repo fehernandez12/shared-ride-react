@@ -5,15 +5,20 @@ import { StorageService } from "./storage.service";
 
 export class UserService {
   async login(request: LoginRequestDto): Promise<LoginResponseDto> {
-    const response = await fetch(`${API_URL}/users/login/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(request)
-    });
-    const data = await response.json() as LoginResponseDto;
-    return data;
+    try {
+      const response = await fetch(`${API_URL}/users/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(request)
+      });
+      const data = await response.json() as LoginResponseDto;
+      return data;
+    } catch (error) {
+      console.log("Request: ", request);
+      console.log("Error: ", error);
+    }
   }
 
   async signup(request: SignupRequestDto): Promise<UserDto> {

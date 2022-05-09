@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import {
   useFonts,
   Quicksand_400Regular,
@@ -12,7 +13,6 @@ import {
 import { Appearance, View, Text } from "react-native";
 import AppLoading from "expo-app-loading";
 import React from "react";
-import "react-native-gesture-handler";
 import { AuthProvider } from "./src/context/AuthContext";
 import { Navigation } from "./src/navigation/Navigation";
 
