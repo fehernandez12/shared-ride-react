@@ -16,6 +16,7 @@ function Login() {
 
   const service = new UserService();
 
+  // Inicializa el formulario
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
