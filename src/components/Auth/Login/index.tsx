@@ -68,6 +68,7 @@ function Login() {
           Iniciar sesión
         </AppText>
       </AppButton>
+      // Link para ir a la pantalla de registro
       <AppText bold={true} style={styles.errorMessages}>
         {formik.errors.email}
       </AppText>

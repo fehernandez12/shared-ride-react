@@ -6,7 +6,6 @@ import { StorageService } from "./storage.service";
 export class UserService {
   async login(request: LoginRequestDto): Promise<LoginResponseDto> {
     const url = `${API_URL}/users/login/`;
-    console.log(url);
     const response: Response = await fetch(url, {
       method: "POST",
       headers: {
@@ -31,7 +30,7 @@ export class UserService {
   }
 
   async verify(request: VerificationRequestDto): Promise<VerificationResponseDto> {
-    const response = await fetch(`${API_URL}/users/verify`, {
+    const response = await fetch(`${API_URL}/users/verify/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
