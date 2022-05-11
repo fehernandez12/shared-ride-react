@@ -1,3 +1,4 @@
+import { ErrorDto } from "../models/error.model";
 import { ProfileDto } from "../models/profile.model";
 import { LoginRequestDto, LoginResponseDto, SignupRequestDto, UserDetailDto, UserDto, VerificationRequestDto, VerificationResponseDto } from "../models/users.model";
 import { API_URL } from "../utilities/constants";
@@ -17,7 +18,7 @@ export class UserService {
     return data;
   }
 
-  async signup(request: SignupRequestDto): Promise<UserDto> {
+  async signup(request: SignupRequestDto): Promise<UserDto | ErrorDto> {
     const response = await fetch(`${API_URL}/users/signup/`, {
       method: "POST",
       headers: {
@@ -25,8 +26,17 @@ export class UserService {
       },
       body: JSON.stringify(request)
     });
-    const data = await response.json() as UserDto;
-    return data;
+    if (response.ok) {
+      const data = await response.json() as UserDto;
+      return data;
+    } else {
+      const data = {
+        status: response.status,
+        message: response.statusText,
+        response: response.json()
+      }
+      return data;
+    }
   }
 
   async verify(request: VerificationRequestDto): Promise<VerificationResponseDto> {
@@ -42,10 +52,12 @@ export class UserService {
   }
 
   async updateProfile(request: Partial<ProfileDto>): Promise<UserDto> {
+    const token = await StorageService.getToken();
     const response = await fetch(`${API_URL}/users/profile/`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`
       },
       body: JSON.stringify(request)
     });

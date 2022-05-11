@@ -8,9 +8,12 @@ import { LoginRequestDto, LoginResponseDto } from "../../../models/users.model";
 import { AppText } from "../../AppText";
 import { AppTextInput } from "../../AppTextInput";
 import { AppButton } from "../../AppButton";
+import { useNavigation } from "@react-navigation/native";
 
 function Login() {
   const [error, setError] = useState("");
+
+  const navigation: any = useNavigation();
 
   const { login } = useAuth();
 
@@ -35,6 +38,10 @@ function Login() {
       }
     },
   });
+
+  const goToSignUp = () => {
+    navigation.navigate("SignUp");
+  };
 
   const changeFieldValue = (text: string, fieldName: string) => {
     formik.setFieldValue(fieldName, text);
@@ -68,7 +75,11 @@ function Login() {
           Iniciar sesión
         </AppText>
       </AppButton>
-      // Link para ir a la pantalla de registro
+      <AppButton onPress={goToSignUp} style={styles.redirectButton}>
+        <AppText bold color={"mariner-blue"}>
+          ¿No tienes una cuenta? Regístrate
+        </AppText>
+      </AppButton>
       <AppText bold={true} style={styles.errorMessages}>
         {formik.errors.email}
       </AppText>
@@ -127,6 +138,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "red",
     marginTop: 8,
+  },
+  redirectButton: {
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
