@@ -5,7 +5,7 @@ function NavLogo() {
   return (
     <Image
       source={require("../../assets/sr-icon.png")}
-      style={{ width: 90, height: 90, top: -20, left: -10 }}
+      style={{ width: 60, height: 60, left: -10 }}
     />
   );
 }

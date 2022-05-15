@@ -9,7 +9,7 @@ import { AppText } from "../../AppText";
 import { AppTextInput } from "../../AppTextInput";
 import { AppButton } from "../../AppButton";
 import { useNavigation } from "@react-navigation/native";
-import { ErrorDto } from "../../../models/error.model";
+import { SignupErrorDto } from "../../../models/error.model";
 
 function SignUpForm() {
   const [error, setError] = useState("");
@@ -19,6 +19,10 @@ function SignUpForm() {
   const { login } = useAuth();
 
   const service = new UserService();
+
+  const isUserDto = (obj: UserDto | SignupErrorDto): boolean => {
+    return obj.hasOwnProperty("profile");
+  };
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -35,7 +39,7 @@ function SignUpForm() {
         password,
         password_confirmation,
       }: SignupRequestDto = values;
-      const response: UserDto | ErrorDto = await service.signup({
+      const response: UserDto | SignupErrorDto = await signUp({
         email,
         username,
         first_name,
@@ -44,15 +48,17 @@ function SignUpForm() {
         password,
         password_confirmation,
       });
-      if (!(response instanceof ErrorDto)) {
-        console.log("Usuario creado!");
-        console.log(response);
+      if (isUserDto(response)) {
+        console.log("Es usuario");
       } else {
-        setError("Error. Verifica que los datos sean correctos.");
         console.log(response);
       }
     },
   });
+
+  const signUp = async (request: SignupRequestDto) => {
+    return await service.signup(request);
+  };
 
   const changeFieldValue = (text: string, fieldName: string) => {
     formik.setFieldValue(fieldName, text);
@@ -69,42 +75,36 @@ function SignUpForm() {
       </AppText>
       <AppTextInput
         placeholder={"Correo electrónico"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.email}
         onChangeText={(text: string) => changeFieldValue(text, "email")}
       />
       <AppTextInput
         placeholder={"Nombre de usuario"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.username}
         onChangeText={(text: string) => changeFieldValue(text, "username")}
       />
       <AppTextInput
         placeholder={"Nombres"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.first_name}
         onChangeText={(text: string) => changeFieldValue(text, "first_name")}
       />
       <AppTextInput
         placeholder={"Apellidos"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.last_name}
         onChangeText={(text: string) => changeFieldValue(text, "last_name")}
       />
       <AppTextInput
         placeholder={"Numero telefónico"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.phone_number}
         onChangeText={(text: string) => changeFieldValue(text, "phone_number")}
       />
       <AppTextInput
         placeholder={"Password"}
-        style={styles.input}
         autoCapitalize="none"
         secureTextEntry={true}
         value={formik.values.password}
@@ -112,7 +112,6 @@ function SignUpForm() {
       />
       <AppTextInput
         placeholder={"Confirma tu Password"}
-        style={styles.input}
         autoCapitalize="none"
         secureTextEntry={true}
         value={formik.values.password_confirmation}
@@ -125,7 +124,7 @@ function SignUpForm() {
         style={styles.buttonContainer}
       >
         <AppText bold color={"white"}>
-          Iniciar sesión
+          Registrarme
         </AppText>
       </AppButton>
       <AppButton onPress={goToLogin} style={styles.redirectButton}>
@@ -177,7 +176,7 @@ function validationSchema() {
   return {
     email: Yup.string()
       .email("Correo electrónico inválido")
-      .required("Campo requerido"),
+      .required("El email es requerido"),
     username: Yup.string().required("El nombre de usuario requerido"),
     first_name: Yup.string().required("El nombre es requerido"),
     last_name: Yup.string().required("El apellido requerido"),
@@ -197,14 +196,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginTop: 50,
     marginBottom: 20,
-  },
-  input: {
-    height: 35,
-    marginHorizontal: 12,
-    marginVertical: 8,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 3,
   },
   buttonContainer: {
     backgroundColor: "#007AFF",

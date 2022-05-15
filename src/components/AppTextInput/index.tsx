@@ -28,7 +28,18 @@ function AppTextInput(props: any) {
 
   return (
     <TextInput
-      style={[{ fontFamily: "Quicksand_400Regular" }, style]}
+      style={[
+        { fontFamily: "Quicksand_400Regular" },
+        {
+          height: 35,
+          marginHorizontal: 12,
+          marginVertical: 8,
+          borderWidth: 1,
+          padding: 10,
+          borderRadius: 3,
+        },
+        style,
+      ]}
       placeholder={placeholder}
       autoCapitalize={autoCapitalize}
       value={value}

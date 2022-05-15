@@ -32,6 +32,7 @@ function Login() {
         password,
       });
       if (response) {
+        console.log(response);
         login(response);
       } else {
         setError("Datos de autenticación incorrectos.");
@@ -54,14 +55,12 @@ function Login() {
       </AppText>
       <AppTextInput
         placeholder={"Correo electrónico"}
-        style={styles.input}
         autoCapitalize="none"
         value={formik.values.email}
         onChangeText={(text: string) => changeFieldValue(text, "email")}
       />
       <AppTextInput
         placeholder={"Password"}
-        style={styles.input}
         autoCapitalize="none"
         secureTextEntry={true}
         value={formik.values.password}
@@ -117,14 +116,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginTop: 100,
     marginBottom: 20,
-  },
-  input: {
-    height: 35,
-    marginHorizontal: 12,
-    marginVertical: 8,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 3,
   },
   buttonContainer: {
     backgroundColor: "#007AFF",

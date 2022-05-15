@@ -1,24 +1,24 @@
-import { ErrorDto } from "../models/error.model";
+import { ErrorDto, SignupErrorDto } from "../models/error.model";
 import { ProfileDto } from "../models/profile.model";
 import { LoginRequestDto, LoginResponseDto, SignupRequestDto, UserDetailDto, UserDto, VerificationRequestDto, VerificationResponseDto } from "../models/users.model";
 import { API_URL } from "../utilities/constants";
+import { ApiService } from "./api.service";
 import { StorageService } from "./storage.service";
 
-export class UserService {
+export class UserService extends ApiService {
   async login(request: LoginRequestDto): Promise<LoginResponseDto> {
-    const url = `${API_URL}/users/login/`;
-    const response: Response = await fetch(url, {
+    const response: Response = await fetch(`${API_URL}/users/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(request)
     });
-    const data = await response.json() as LoginResponseDto;
-    return data;
+    this.handleErrors(response);
+    return await response.json() as LoginResponseDto;
   }
 
-  async signup(request: SignupRequestDto): Promise<UserDto | ErrorDto> {
+  async signup(request: SignupRequestDto): Promise<UserDto | SignupErrorDto> {
     const response = await fetch(`${API_URL}/users/signup/`, {
       method: "POST",
       headers: {
@@ -27,17 +27,12 @@ export class UserService {
       body: JSON.stringify(request)
     });
     if (response.ok) {
-      const data = await response.json() as UserDto;
-      return data;
+      return await response.json() as UserDto;
     } else {
-      const data = {
-        status: response.status,
-        message: response.statusText,
-        response: response.json()
-      }
-      return data;
+      return await response.json() as SignupErrorDto;
     }
   }
+
 
   async verify(request: VerificationRequestDto): Promise<VerificationResponseDto> {
     const response = await fetch(`${API_URL}/users/verify/`, {
@@ -47,8 +42,7 @@ export class UserService {
       },
       body: JSON.stringify(request)
     });
-    const data = await response.json() as VerificationResponseDto;
-    return data;
+    return await response.json() as VerificationResponseDto;
   }
 
   async updateProfile(request: Partial<ProfileDto>): Promise<UserDto> {
@@ -61,8 +55,7 @@ export class UserService {
       },
       body: JSON.stringify(request)
     });
-    const data = await response.json() as UserDto;
-    return data;
+    return await response.json() as UserDto;
   }
 
   async getUser(username: string): Promise<UserDetailDto> {
@@ -74,7 +67,6 @@ export class UserService {
         "Authorization": `Token ${token}`
       }
     });
-    const data = await response.json() as UserDetailDto;
-    return data;
+    return await response.json() as UserDetailDto;
   }
 }
