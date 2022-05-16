@@ -12,4 +12,5 @@ export interface SignupErrorDto {
   password_confirmation: string[];
   first_name: string[];
   last_name: string[];
+  non_field_errors: never;
 }

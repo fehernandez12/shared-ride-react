@@ -34,7 +34,6 @@ function AppTextInput(props: any) {
         { fontFamily: "Quicksand_400Regular" },
         multiline ? {} : { height: 35 },
         {
-          marginHorizontal: 12,
           marginVertical: 8,
           borderWidth: 1,
           padding: 10,

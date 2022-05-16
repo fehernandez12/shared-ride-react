@@ -14,7 +14,6 @@ export class UserService extends ApiService {
       },
       body: JSON.stringify(request)
     });
-    this.handleErrors(response);
     return await response.json() as LoginResponseDto;
   }
 

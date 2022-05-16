@@ -1,15 +1,17 @@
-import { View, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigation } from "@react-navigation/native";
 import useAuth from "../../../context/AuthContext/useAuth";
 import { UserService } from "../../../services/users.service";
 import { SignupRequestDto, UserDto } from "../../../models/users.model";
+import { AppLogo } from "../../AppLogo";
 import { AppText } from "../../AppText";
 import { AppTextInput } from "../../AppTextInput";
 import { AppButton } from "../../AppButton";
-import { useNavigation } from "@react-navigation/native";
 import { SignupErrorDto } from "../../../models/error.model";
+import { COLORS } from "../../../styles/colors";
 
 function SignUpForm() {
   const [error, setError] = useState("");
@@ -49,9 +51,17 @@ function SignUpForm() {
         password_confirmation,
       });
       if (isUserDto(response)) {
-        console.log("Es usuario");
+        goToVerification();
       } else {
-        console.log(response);
+        if (Array.isArray(response.username) || Array.isArray(response.email)) {
+          setError("El nombre de usuario o correo ya está en uso.");
+        } else {
+          if (response.non_field_errors) {
+            setError("Las contraseñas no coinciden.");
+          } else if (formik.errors) {
+            setError("Todos los campos son obligatorios.");
+          }
+        }
       }
     },
   });
@@ -68,8 +78,13 @@ function SignUpForm() {
     navigation.navigate("Main");
   };
 
+  const goToVerification = () => {
+    navigation.navigate("Verification");
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <AppLogo width={240} />
       <AppText style={styles.title} bold color={"black-pearl"}>
         Crear cuenta
       </AppText>
@@ -122,6 +137,7 @@ function SignUpForm() {
       <AppButton
         onPress={() => formik.handleSubmit()}
         style={styles.buttonContainer}
+        bgColor="mariner-blue"
       >
         <AppText bold color={"white"}>
           Registrarme
@@ -132,31 +148,15 @@ function SignUpForm() {
           ¿Ya tienes una cuenta? Inicia sesión.
         </AppText>
       </AppButton>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.email}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.first_name}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.last_name}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.username}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.phone_number}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.password}
-      </AppText>
-      <AppText bold style={styles.errorMessages}>
-        {formik.errors.password_confirmation}
-      </AppText>
+      <AppButton onPress={goToVerification} style={styles.redirectButton}>
+        <AppText bold color={"mariner-blue"}>
+          ¿No has activado tu cuenta? ¡Actívala aquí!
+        </AppText>
+      </AppButton>
       <AppText bold style={styles.errorMessages}>
         {error}
       </AppText>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -177,7 +177,7 @@ function validationSchema() {
     email: Yup.string()
       .email("Correo electrónico inválido")
       .required("El email es requerido"),
-    username: Yup.string().required("El nombre de usuario requerido"),
+    username: Yup.string().required("El nombre de usuario es requerido"),
     first_name: Yup.string().required("El nombre es requerido"),
     last_name: Yup.string().required("El apellido requerido"),
     phone_number: Yup.string().required("El número telefónico es requerido"),
@@ -188,17 +188,15 @@ function validationSchema() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 150,
+    paddingTop: 80,
     paddingHorizontal: 20,
   },
   title: {
     textAlign: "center",
     fontSize: 28,
-    marginTop: 50,
     marginBottom: 20,
   },
   buttonContainer: {
-    backgroundColor: "#007AFF",
     marginHorizontal: 100,
     borderRadius: 3,
     padding: 8,
@@ -207,11 +205,11 @@ const styles = StyleSheet.create({
   },
   errorMessages: {
     textAlign: "center",
-    color: "red",
+    color: COLORS["red"],
     marginTop: 8,
   },
   redirectButton: {
-    marginTop: 20,
+    marginVertical: 0,
     marginHorizontal: 0,
     alignItems: "center",
     justifyContent: "center",

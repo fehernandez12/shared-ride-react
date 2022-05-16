@@ -32,6 +32,7 @@ function AppButton(props: any) {
 
 const styles = StyleSheet.create({
   button: {
+    marginVertical: 10,
     marginHorizontal: 100,
     padding: 7,
     borderRadius: 3,

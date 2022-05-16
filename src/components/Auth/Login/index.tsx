@@ -2,13 +2,15 @@ import { View, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import useAuth from "../../../context/AuthContext/useAuth";
 import { UserService } from "../../../services/users.service";
 import { LoginRequestDto, LoginResponseDto } from "../../../models/users.model";
+import { AppLogo } from "../../AppLogo";
 import { AppText } from "../../AppText";
 import { AppTextInput } from "../../AppTextInput";
 import { AppButton } from "../../AppButton";
-import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../../../styles/colors";
 
 function Login() {
   const [error, setError] = useState("");
@@ -31,11 +33,18 @@ function Login() {
         email,
         password,
       });
-      if (response) {
-        console.log(response);
+      if (response.access_token) {
         login(response);
       } else {
-        setError("Datos de autenticación incorrectos.");
+        console.log(response);
+
+        if (response.non_field_errors) {
+          setError(
+            response.non_field_errors[0] === "Account is not active yet :("
+              ? "Tu cuenta no está activa aún 🥺"
+              : "El correo o la contraseña son incorrectos 😢"
+          );
+        }
       }
     },
   });
@@ -44,12 +53,17 @@ function Login() {
     navigation.navigate("SignUp");
   };
 
+  const goToVerification = () => {
+    navigation.navigate("Verification");
+  };
+
   const changeFieldValue = (text: string, fieldName: string) => {
     formik.setFieldValue(fieldName, text);
   };
 
   return (
     <View style={styles.container}>
+      <AppLogo width={240} />
       <AppText style={styles.title} bold={true} color={"black-pearl"}>
         Iniciar sesión
       </AppText>
@@ -66,27 +80,23 @@ function Login() {
         value={formik.values.password}
         onChangeText={(text: string) => changeFieldValue(text, "password")}
       />
-      <AppButton
-        onPress={() => formik.handleSubmit()}
-        style={styles.buttonContainer}
-      >
+      <AppButton onPress={() => formik.handleSubmit()} bgColor="mariner-blue">
         <AppText bold={true} color={"white"}>
           Iniciar sesión
         </AppText>
       </AppButton>
       <AppButton onPress={goToSignUp} style={styles.redirectButton}>
         <AppText bold color={"mariner-blue"}>
-          ¿No tienes una cuenta? Regístrate
+          ¿No tienes una cuenta? ¡Regístrate!
+        </AppText>
+      </AppButton>
+      <AppButton onPress={goToVerification} style={styles.redirectButton}>
+        <AppText bold color={"mariner-blue"}>
+          ¿No has activado tu cuenta? ¡Actívala aquí!
         </AppText>
       </AppButton>
       <AppText bold={true} style={styles.errorMessages}>
-        {formik.errors.email}
-      </AppText>
-      <AppText bold={true} style={styles.errorMessages}>
-        {formik.errors.password}
-      </AppText>
-      <AppText bold={true} style={styles.errorMessages}>
-        {error}
+        {error ? error : formik.errors.email || formik.errors.password}
       </AppText>
     </View>
   );
@@ -114,24 +124,15 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 28,
-    marginTop: 100,
+    marginTop: 0,
     marginBottom: 20,
-  },
-  buttonContainer: {
-    backgroundColor: "#007AFF",
-    marginHorizontal: 100,
-    borderRadius: 3,
-    padding: 8,
-    alignItems: "center",
-    justifyContent: "center",
   },
   errorMessages: {
     textAlign: "center",
-    color: "red",
-    marginTop: 8,
+    color: COLORS["red"],
   },
   redirectButton: {
-    marginTop: 20,
+    marginVertical: 0,
     marginHorizontal: 0,
     alignItems: "center",
     justifyContent: "center",

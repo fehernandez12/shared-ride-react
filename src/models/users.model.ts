@@ -8,6 +8,7 @@ export interface UserDto {
   email: string;
   phone_number: string;
   profile: ProfileDto;
+  non_field_errors: never;
 }
 
 export interface UserDetailDto {
@@ -23,6 +24,7 @@ export interface LoginRequestDto {
 export interface LoginResponseDto {
   user: UserDto;
   access_token: string;
+  non_field_errors: never;
 }
 
 export interface SignupRequestDto {
@@ -41,4 +43,5 @@ export interface VerificationRequestDto {
 
 export interface VerificationResponseDto {
   message: string;
+  token: never;
 }

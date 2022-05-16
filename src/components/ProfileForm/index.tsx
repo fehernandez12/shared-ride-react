@@ -58,6 +58,9 @@ function ProfileForm() {
         </AppText>
       </View>
       <View style={styles.content}>
+        <AppText bold color={"black-pearl"}>
+          Acerca de mí
+        </AppText>
         <AppTextInput
           placeholder={profile?.biography ? null : "Acerca de mí"}
           autoCapitalize="sentences"
