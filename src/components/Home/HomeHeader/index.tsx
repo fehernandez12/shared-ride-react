@@ -1,10 +1,10 @@
 import { View, StyleSheet, Button } from "react-native";
 import React from "react";
-import { UserDto } from "../../models/users.model";
+import { UserDto } from "../../../models/users.model";
 import { StatCard } from "../StatCard";
-import { AppText } from "../AppText";
-import { COLORS } from "../../styles/colors";
-import useAuth from "../../context/AuthContext/useAuth";
+import { AppText } from "../../AppComponents/AppText";
+import { COLORS } from "../../../styles/colors";
+import useAuth from "../../../context/AuthContext/useAuth";
 
 function HomeHeader(props: any) {
   const { user } = props as { user: UserDto };

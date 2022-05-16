@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
 import useAuth from "../../context/AuthContext/useAuth";
-import { HomeHeader } from "../HomeHeader";
+import { HomeHeader } from "./HomeHeader";
 
 function Home() {
   const { user } = useAuth();

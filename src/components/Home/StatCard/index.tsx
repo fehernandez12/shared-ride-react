@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
-import { AppText } from "../AppText";
+import { AppText } from "../../AppComponents/AppText";
 
 function StatCard(props: any) {
   const { title, value, bg } = props;

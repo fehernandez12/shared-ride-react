@@ -6,10 +6,10 @@ import * as Yup from "yup";
 import { UserService } from "../../../services/users.service";
 import { VerificationRequestDto } from "../../../models/users.model";
 import { VerificationResponseDto } from "../../../models/users.model";
-import { AppLogo } from "../../AppLogo";
-import { AppText } from "../../AppText";
-import { AppTextInput } from "../../AppTextInput";
-import { AppButton } from "../../AppButton";
+import { AppLogo } from "../../AppComponents/AppLogo";
+import { AppText } from "../../AppComponents/AppText";
+import { AppTextInput } from "../../AppComponents/AppTextInput";
+import { AppButton } from "../../AppComponents/AppButton";
 import { COLORS } from "../../../styles/colors";
 
 function VerificationForm() {

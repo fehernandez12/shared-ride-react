@@ -6,7 +6,7 @@ import {
   Quicksand_700Bold,
   useFonts,
 } from "@expo-google-fonts/quicksand";
-import { COLORS } from "../../styles/colors";
+import { COLORS } from "../../../styles/colors";
 
 function AppText(props: any) {
   const { children, style, bold, color } = props;

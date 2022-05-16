@@ -6,10 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 import useAuth from "../../../context/AuthContext/useAuth";
 import { UserService } from "../../../services/users.service";
 import { SignupRequestDto, UserDto } from "../../../models/users.model";
-import { AppLogo } from "../../AppLogo";
-import { AppText } from "../../AppText";
-import { AppTextInput } from "../../AppTextInput";
-import { AppButton } from "../../AppButton";
+import { AppLogo } from "../../AppComponents/AppLogo";
+import { AppText } from "../../AppComponents/AppText";
+import { AppTextInput } from "../../AppComponents/AppTextInput";
+import { AppButton } from "../../AppComponents/AppButton";
 import { SignupErrorDto } from "../../../models/error.model";
 import { COLORS } from "../../../styles/colors";
 

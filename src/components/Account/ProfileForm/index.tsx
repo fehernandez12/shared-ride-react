@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AppText } from "../AppText";
-import { AppTextInput } from "../AppTextInput";
-import { AppButton } from "../AppButton";
-import useAuth from "../../context/AuthContext/useAuth";
-import { UserService } from "../../services/users.service";
-import { ProfileDto } from "../../models/profile.model";
-import { UserDto } from "../../models/users.model";
+import { AppText } from "../../AppComponents/AppText";
+import { AppTextInput } from "../../AppComponents/AppTextInput";
+import { AppButton } from "../../AppComponents/AppButton";
+import useAuth from "../../../context/AuthContext/useAuth";
+import { UserService } from "../../../services/users.service";
+import { ProfileDto } from "../../../models/profile.model";
+import { UserDto } from "../../../models/users.model";
 
 function ProfileForm() {
   const { user, setUser } = useAuth();

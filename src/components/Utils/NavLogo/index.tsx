@@ -1,5 +1,5 @@
 import React from "react";
-import { AppImage } from "../AppImage";
+import { AppImage } from "../../AppComponents/AppImage";
 
 function NavLogo() {
   return (

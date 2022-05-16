@@ -6,7 +6,7 @@ import {
   Quicksand_700Bold,
   useFonts,
 } from "@expo-google-fonts/quicksand";
-import { COLORS } from "../../styles/colors";
+import { COLORS } from "../../../styles/colors";
 
 function AppButton(props: any) {
   const { children, style, onPress, bgColor } = props;

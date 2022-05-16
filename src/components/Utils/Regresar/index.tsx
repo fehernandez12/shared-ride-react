@@ -2,8 +2,8 @@ import { Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { AppText } from "../AppText";
-import { COLORS } from "../../styles/colors";
+import { AppText } from "../../AppComponents/AppText";
+import { COLORS } from "../../../styles/colors";
 
 function Regresar(props: any) {
   const navigation = useNavigation();

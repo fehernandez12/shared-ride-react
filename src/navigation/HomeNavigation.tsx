@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Main } from "../screens/Main";
 import { SignUp } from "../screens/SignUp";
 import { Verification } from "../screens/Verification";
-import { Regresar } from "../components/Regresar";
+import { Regresar } from "../components/Utils/Regresar";
 
 const Stack = createStackNavigator();
 

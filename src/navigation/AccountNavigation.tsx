@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { ProfileForm } from "../components/ProfileForm";
-import { Regresar } from "../components/Regresar";
+import { ProfileForm } from "../components/Account/ProfileForm";
+import { Regresar } from "../components/Utils/Regresar";
 import { Account } from "../screens/Account";
 
 const Stack = createStackNavigator();

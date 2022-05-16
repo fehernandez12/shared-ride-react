@@ -1,9 +1,9 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import React from "react";
-import useAuth from "../../context/AuthContext/useAuth";
-import { AppImage } from "../AppImage";
-import { AppText } from "../AppText";
-import { AppButton } from "../AppButton";
+import useAuth from "../../../context/AuthContext/useAuth";
+import { AppImage } from "../../AppComponents/AppImage";
+import { AppText } from "../../AppComponents/AppText";
+import { AppButton } from "../../AppComponents/AppButton";
 import { UserDetailItem } from "../UserDetailItem";
 import { RepStars } from "../RepStars";
 import { useNavigation } from "@react-navigation/native";

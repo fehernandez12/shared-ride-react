@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { HomeNavigation } from "./HomeNavigation";
-import { NavLogo } from "../components/NavLogo";
+import { NavLogo } from "../components/Utils/NavLogo";
 import { AccountNavigation } from "./AccountNavigation";
 import useAuth from "../context/AuthContext/useAuth";
 import { RidesNavigation } from "./RidesNavigation";
