@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
-import { AppText } from "../AppComponents/AppText";
+import { AppText } from "../../AppComponents/AppText";
 
 function UserDetailItem(props: any) {
   const { title, text } = props;

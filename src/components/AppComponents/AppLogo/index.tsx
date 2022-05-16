@@ -6,7 +6,7 @@ function AppLogo(props: any) {
 
   return (
     <AppImage
-      source={require("../../assets/sr-logo.png")}
+      source={require("../../../assets/sr-logo.png")}
       style={[{ width: width, height: width / 2, left: 50 }]}
     />
   );
