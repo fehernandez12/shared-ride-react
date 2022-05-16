@@ -24,11 +24,10 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.75,
-    shadowRadius: 3.84,
-    elevation: 10,
+    shadowOpacity: 0.5,
+    shadowRadius: 1.84,
   },
   container: {
     flex: 1,
@@ -38,10 +37,9 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 2,
     },
-    shadowOpacity: 0.75,
-    shadowRadius: 3.84,
-    elevation: 10,
+    shadowOpacity: 0.5,
+    shadowRadius: 1.84,
   },
 });

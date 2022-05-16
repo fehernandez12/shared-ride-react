@@ -29,7 +29,6 @@ function HomeHeader(props: any) {
           bg={COLORS["mariner-blue"]}
         />
       </View>
-      <Button onPress={logout} title="Salir" />
     </View>
   );
 }

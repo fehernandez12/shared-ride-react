@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import React from "react";
 import AppLoading from "expo-app-loading";
 import {
@@ -23,11 +23,21 @@ function AppButton(props: any) {
   return (
     <Pressable
       onPress={onPress}
-      style={[{ backgroundColor: COLORS[bgColor] }, style]}
+      style={[styles.button, { backgroundColor: COLORS[bgColor] }, style]}
     >
       {children}
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    marginHorizontal: 100,
+    padding: 7,
+    borderRadius: 3,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 export { AppButton };

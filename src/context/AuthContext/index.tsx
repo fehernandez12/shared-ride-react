@@ -5,6 +5,7 @@ import { UserService } from "../../services/users.service";
 
 interface Context {
   user: UserDto | undefined;
+  setUser: (user: UserDto | undefined) => void;
   token: string | null;
   login: (data: LoginResponseDto) => void;
   logout: () => void;
@@ -12,6 +13,7 @@ interface Context {
 
 export const AuthContext = createContext<Context>({
   user: undefined,
+  setUser: () => {},
   token: "",
   login: () => {},
   logout: () => {},
@@ -39,6 +41,7 @@ function AuthProvider(props: any) {
 
   const value = {
     user,
+    setUser,
     token,
     login,
     logout,

@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   redirectButton: {
     marginTop: 20,
+    marginHorizontal: 0,
     alignItems: "center",
     justifyContent: "center",
   },

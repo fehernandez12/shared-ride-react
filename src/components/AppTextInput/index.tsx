@@ -15,6 +15,8 @@ function AppTextInput(props: any) {
     value,
     onChangeText,
     secureTextEntry,
+    multiline,
+    numberOfLines,
   } = props;
 
   let [fontsLoaded] = useFonts({
@@ -30,8 +32,8 @@ function AppTextInput(props: any) {
     <TextInput
       style={[
         { fontFamily: "Quicksand_400Regular" },
+        multiline ? {} : { height: 35 },
         {
-          height: 35,
           marginHorizontal: 12,
           marginVertical: 8,
           borderWidth: 1,
@@ -45,6 +47,8 @@ function AppTextInput(props: any) {
       value={value}
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry ? true : false}
+      multiline={multiline ? true : false}
+      numberOfLines={multiline && numberOfLines ? numberOfLines : null}
     />
   );
 }
