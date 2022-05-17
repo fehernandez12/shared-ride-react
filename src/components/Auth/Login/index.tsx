@@ -36,8 +36,6 @@ function Login() {
       if (response.access_token) {
         login(response);
       } else {
-        console.log(response);
-
         if (response.non_field_errors) {
           setError(
             response.non_field_errors[0] === "Account is not active yet :("

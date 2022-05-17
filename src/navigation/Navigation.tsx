@@ -5,7 +5,7 @@ import { HomeNavigation } from "./HomeNavigation";
 import { NavLogo } from "../components/Utils/NavLogo";
 import { AccountNavigation } from "./AccountNavigation";
 import useAuth from "../context/AuthContext/useAuth";
-import { RidesNavigation } from "./RidesNavigation";
+import { CirclesNavigation } from "./CirclesNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,16 +16,16 @@ function Navigation() {
     <Tab.Navigator initialRouteName="Home">
       {user && (
         <Tab.Screen
-          name="Rides"
-          component={RidesNavigation}
+          name="Círculos"
+          component={CirclesNavigation}
           options={{
-            tabBarLabel: "Rides",
+            tabBarLabel: "Círculos",
             tabBarLabelStyle: {
               fontFamily: "Quicksand_400Regular",
               fontSize: 13,
             },
             tabBarIcon: ({ color, size }) => (
-              <Icon name="directions-car" color={color} size={size} />
+              <Icon name="group-work" color={color} size={size} />
             ),
             headerShown: false,
           }}

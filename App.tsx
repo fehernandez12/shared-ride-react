@@ -29,9 +29,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer>
       <AuthProvider>
         <Navigation />
       </AuthProvider>

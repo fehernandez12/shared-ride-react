@@ -42,7 +42,7 @@ function VerificationForm() {
         );
         navigation.navigate("Main");
       } else {
-        console.log(response);
+        response;
         if (response.token) {
           setError("El token es inválido 😢");
         }

@@ -44,18 +44,17 @@ export class UserService extends ApiService {
     return await response.json() as VerificationResponseDto;
   }
 
-  async updateProfile(request: Partial<ProfileDto>, username: string): Promise<UserDto> {
+  async updateProfile(username: string, data?: any, request?: Partial<ProfileDto>): Promise<UserDto> {
     const token = await StorageService.getToken();
     const response = await fetch(`${API_URL}/users/${username}/profile/`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Content-Type": data ? `multipart/form-data; boundary=${token}` : 'application/json',
         "Authorization": `Token ${token}`
       },
-      body: JSON.stringify(request)
+      body: data ? data : JSON.stringify(request)
     });
-    console.log(token)
-    console.log(response.status);
     return await response.json() as UserDto;
   }
 

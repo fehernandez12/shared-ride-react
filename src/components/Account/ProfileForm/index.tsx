@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import * as ImagePicker from "expo-image-picker";
 import { AppText } from "../../AppComponents/AppText";
 import { AppTextInput } from "../../AppComponents/AppTextInput";
 import { AppButton } from "../../AppComponents/AppButton";
@@ -10,6 +11,7 @@ import useAuth from "../../../context/AuthContext/useAuth";
 import { UserService } from "../../../services/users.service";
 import { ProfileDto } from "../../../models/profile.model";
 import { UserDto } from "../../../models/users.model";
+import { AppImage } from "../../AppComponents/AppImage";
 
 function ProfileForm() {
   const { user, setUser } = useAuth();
@@ -30,14 +32,16 @@ function ProfileForm() {
       setError("");
       const { biography }: Partial<ProfileDto> = values;
       const response: UserDto = await service.updateProfile(
-        { biography },
-        user!.username
+        user!.username,
+        null,
+        { biography }
       );
+
       if (isUserDto(response)) {
         setUser(response);
         goToUserDetail();
       } else {
-        console.log(response);
+        setError("Error al actualizar su perfil.");
       }
     },
   });
@@ -46,8 +50,33 @@ function ProfileForm() {
     navigation.goBack();
   };
 
-  const changeFieldValue = (field: string, value: string) => {
+  const changeFieldValue = (field: string, value: any) => {
     formik.setFieldValue(field, value);
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+      includeBase64: true,
+    });
+
+    if (result.cancelled) {
+      return;
+    }
+    let blob = await (await fetch(result.uri)).blob();
+
+    // Upload the image using the fetch and FormData APIs
+    let formData = new FormData();
+    // Assume "photo" is the name of the form field the server expects
+    formData.append("photo", blob);
+
+    const response = await service.updateProfile(user!.username, formData);
+
+    if (isUserDto(response)) {
+      setUser(response);
+    }
   };
 
   return (
@@ -69,6 +98,29 @@ function ProfileForm() {
           multiline
           numberOfLines={4}
         />
+        {/* <AppText bold color={"black-pearl"}>
+          Foto de perfil
+        </AppText> */}
+        {/* <View style={styles.imageContainer}>
+          <AppImage
+            source={
+              profile?.picture
+                ? { uri: profile?.picture }
+                : require("../../../assets/avatar-placeholder.png")
+            }
+            style={styles.profilePicture}
+            flex={false}
+          />
+        </View>
+        <AppButton
+          bgColor="purple"
+          style={{ marginHorizontal: 75 }}
+          onPress={pickImage}
+        >
+          <AppText bold color={"white"}>
+            Cambiar foto del perfil
+          </AppText>
+        </AppButton> */}
         <AppButton bgColor="green" onPress={() => formik.handleSubmit()}>
           <AppText bold color={"white"}>
             Guardar cambios
@@ -82,6 +134,7 @@ function ProfileForm() {
 function initialValues(text: string): Partial<ProfileDto> {
   return {
     biography: text || "",
+    picture: undefined,
   };
 }
 
@@ -106,6 +159,20 @@ const styles = StyleSheet.create({
   },
   content: {
     marginBottom: 20,
+  },
+  imageContainer: {
+    width: "100%",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  profilePicture: {
+    padding: 7,
+    borderColor: "#fafbfc",
+    borderWidth: 3,
+    width: 200,
+    height: 200,
+    borderRadius: 3,
+    marginTop: 20,
   },
 });
 

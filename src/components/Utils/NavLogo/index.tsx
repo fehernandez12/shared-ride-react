@@ -7,6 +7,7 @@ function NavLogo() {
       source={require("../../../assets/sr-icon.png")}
       style={{ width: 60, height: 60, left: -10 }}
       shadow
+      flex={false}
     />
   );
 }

@@ -25,12 +25,17 @@ function UserDetail() {
         </AppText>
       </View>
       <View style={styles.content}>
-        <View style={styles.imageContainer}>
+        {/* <View style={styles.imageContainer}>
           <AppImage
-            source={{ uri: profile?.picture }}
+            source={
+              profile?.picture
+                ? { uri: profile?.picture }
+                : require("../../../assets/avatar-placeholder.png")
+            }
             style={styles.profilePicture}
+            flex
           />
-        </View>
+        </View> */}
         <UserDetailItem title="Username" text={`@${user?.username}`} />
         <UserDetailItem
           title="Nombre"
@@ -45,16 +50,12 @@ function UserDetail() {
         <UserDetailItem title="Reputación">
           <RepStars reputation={profile?.reputation} />
         </UserDetailItem>
-        <AppButton
-          style={styles.button}
-          onPress={goToProfileForm}
-          bgColor="teal"
-        >
+        <AppButton onPress={goToProfileForm} bgColor="teal">
           <AppText color="white" bold>
             Editar perfil
           </AppText>
         </AppButton>
-        <AppButton style={styles.button} onPress={logout} bgColor="red">
+        <AppButton onPress={logout} bgColor="red">
           <AppText color="white" bold>
             Cerrar sesión
           </AppText>
@@ -66,7 +67,7 @@ function UserDetail() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 100,
+    marginTop: 75,
     marginHorizontal: 20,
   },
   titleBlock: {
@@ -92,9 +93,6 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 100,
     marginBottom: 20,
-  },
-  button: {
-    marginTop: 10,
   },
 });
 
