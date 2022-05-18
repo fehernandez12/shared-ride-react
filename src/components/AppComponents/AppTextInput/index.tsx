@@ -48,6 +48,7 @@ function AppTextInput(props: any) {
       secureTextEntry={secureTextEntry ? true : false}
       multiline={multiline ? true : false}
       numberOfLines={multiline && numberOfLines ? numberOfLines : null}
+      autoCorrect={false}
     />
   );
 }

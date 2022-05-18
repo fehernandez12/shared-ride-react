@@ -49,6 +49,15 @@ function CirclesHome() {
             </Pressable>
           </AppMenuItem>
         )}
+        {userDetail.circles && userDetail.circles.length > 0 && (
+          <AppMenuItem>
+            <Pressable onPress={goToCircleCreate}>
+              <AppText bold color="mariner-blue">
+                Crear un círculo nuevo
+              </AppText>
+            </Pressable>
+          </AppMenuItem>
+        )}
       </View>
     </ScrollView>
   );

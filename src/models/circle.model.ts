@@ -11,6 +11,7 @@ export interface CircleDto {
   is_public: boolean;
   is_limited: boolean;
   members_limit: number;
+  detail: never;
 }
 
 export interface MembershipDto {

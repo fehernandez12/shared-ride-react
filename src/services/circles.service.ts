@@ -16,7 +16,19 @@ export class CircleService extends ApiService {
     return await response.json() as CircleDto[];
   }
 
-  public async createCircle(username: string, request: CircleDto): Promise<CircleDto> {
+  public async getCircle(slug_name: string): Promise<CircleDto> {
+    const token = await StorageService.getToken();
+    const response = await fetch(`${API_URL}/circles/${slug_name}/`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Token ${token}`
+      }
+    });
+    return await response.json() as CircleDto;
+  }
+
+  public async createCircle(request: Partial<CircleDto>): Promise<CircleDto> {
     const token = await StorageService.getToken();
     const response = await fetch(`${API_URL}/circles/`, {
       method: "POST",
