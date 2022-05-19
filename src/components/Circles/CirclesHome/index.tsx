@@ -1,16 +1,20 @@
 import { ScrollView, View, StyleSheet, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../AppComponents/AppText";
 import { AppMenuItem } from "../../AppComponents/AppMenuItem";
 import { UserService } from "../../../services/users.service";
 import useAuth from "../../../context/AuthContext/useAuth";
 import { UserDetailDto } from "../../../models/users.model";
-import { useNavigation } from "@react-navigation/native";
+import { CircleListItem } from "../CircleListItem";
 
 function CirclesHome() {
+  const isFocused = useIsFocused();
   const { user } = useAuth();
   const userService = new UserService();
   const navigation: any = useNavigation();
+
   const [userDetail, setUserDetail] = useState<UserDetailDto>(
     {} as UserDetailDto
   );
@@ -19,10 +23,14 @@ function CirclesHome() {
     userService
       .getUser(user!.username)
       .then((response) => setUserDetail(response));
-  }, []);
+  }, [isFocused]);
 
   const goToCircleCreate = () => {
     navigation.navigate("CreateCircle");
+  };
+
+  const goToCircleDetail = (slug: string) => {
+    navigation.navigate("CircleDetail", { slug: slug });
   };
 
   return (
@@ -38,7 +46,7 @@ function CirclesHome() {
       <View style={styles.content}>
         {userDetail.circles && userDetail.circles.length > 0 ? (
           userDetail.circles.map((circle) => (
-            <AppMenuItem key={circle.slug_name} title={circle.name} />
+            <CircleListItem key={circle.slug_name} circle={circle} />
           ))
         ) : (
           <AppMenuItem>

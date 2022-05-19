@@ -5,7 +5,15 @@ import { NewCircle } from "../screens/NewCircle";
 import { Regresar } from "../components/Utils/Regresar";
 import { CircleDetailScreen } from "../screens/CircleDetailScreen";
 
-const Stack = createStackNavigator();
+export type CircleStackParamList = {
+  CirclesNav: undefined;
+  CreateCircle: undefined;
+  CircleDetail: {
+    slug: string;
+  };
+};
+
+const Stack = createStackNavigator<CircleStackParamList>();
 
 function CirclesNavigation() {
   return (
@@ -27,11 +35,11 @@ function CirclesNavigation() {
       <Stack.Screen
         name="CircleDetail"
         component={CircleDetailScreen}
-        options={{
+        options={({ route }) => ({
           title: "",
           headerTransparent: true,
           headerLeft: () => <Regresar>Regresar</Regresar>,
-        }}
+        })}
       />
     </Stack.Navigator>
   );
