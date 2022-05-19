@@ -15,7 +15,7 @@ function HomeHeader(props: any) {
       <AppText
         style={styles.title}
         bold={true}
-      >{`¡Hola, ${user.first_name}!`}</AppText>
+      >{`Bienvei, ${user.first_name}!`}</AppText>
       <View style={styles.hr} />
     </View>
   );
