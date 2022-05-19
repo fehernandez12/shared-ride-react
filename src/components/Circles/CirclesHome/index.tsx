@@ -4,6 +4,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../AppComponents/AppText";
 import { AppMenuItem } from "../../AppComponents/AppMenuItem";
+import { AppTitle } from "../../AppComponents/AppTitle";
 import { UserService } from "../../../services/users.service";
 import useAuth from "../../../context/AuthContext/useAuth";
 import { UserDetailDto } from "../../../models/users.model";
@@ -35,14 +36,10 @@ function CirclesHome() {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.titleBlock}>
-        <AppText style={styles.title} bold>
-          Tus círculos
-        </AppText>
-      </View>
-      <AppText style={styles.subTitle}>
-        Aquí puedes ver los círculos a los que perteneces.
-      </AppText>
+      <AppTitle
+        title="Tus círculos"
+        subTitle="Aquí puedes ver los círculos a los que perteneces."
+      />
       <View style={styles.content}>
         {userDetail.circles && userDetail.circles.length > 0 ? (
           userDetail.circles.map((circle) => (
