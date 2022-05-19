@@ -1,4 +1,4 @@
-import { View, StyleSheet, Button } from "react-native";
+import { View, Image, StyleSheet, Button } from "react-native";
 import React, {useState} from "react";
 import { UserDto } from "../../../models/users.model";
 import { StatCard } from "../StatCard";
@@ -17,7 +17,7 @@ function DashBoardInfo(props: any) {
   return (
     <View>
       <View style={styles.stats}>
-        <StatCard
+        {/* <StatCard
           title="Rides ofrecidos"
           value={user.profile.rides_offered}
           bg={COLORS["curious-blue"]}
@@ -26,10 +26,12 @@ function DashBoardInfo(props: any) {
           title="Rides tomados"
           value={user.profile.rides_taken}
           bg={COLORS["mariner-blue"]}
-        />
+        /> */}
+        <View>
+          <Image source={require('../../../assets/undraw_navigator_a479.png')} />
 
+        </View>
       </View>
-      
     </View>
   );
 }
